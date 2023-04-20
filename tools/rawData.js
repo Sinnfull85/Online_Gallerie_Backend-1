@@ -28,13 +28,20 @@ const fetchDetailData = async idNumber => {
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${idNumber}`
     )
     const data = await response.json()
-    console.log(data)
+    console.log(data.isPublicDomain)
+    console.log(data.classification)
+    if(data.isPublicDomain===true && data.classification==="Paintings"){
+        console.log(2222)
+        createGallery(data);
+    }
+   
   } catch (e) {
     console.log(e)
   }
 }
 
-const createGallery = async (req, res, next) => {
+const createGallery = async (data) => {
+    console.log(11111)
   const {
     title,
     period,
@@ -48,7 +55,8 @@ const createGallery = async (req, res, next) => {
     artistDisplayName,
     artistDisplayBio,
     objectId
-  } = req.body
+  } = data;
+  console.log(title)
   try {
     const newGalleryDate = await GalleryData.create({
       title,
@@ -64,8 +72,8 @@ const createGallery = async (req, res, next) => {
       artistDisplayBio,
       objectId
     })
-    res.json({ data: newGalleryDate })
+   
   } catch (e) {
-    next(e)
+    console.log(e)
   }
 }
