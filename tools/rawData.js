@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const fetch = require('node-fetch')
-const GalleryData = require('../models/galleryData')
+const aaa = require('../models/galleryData')
 
 const fetchData = async () => {
   try {
@@ -9,7 +9,6 @@ const fetchData = async () => {
       'https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=11&q=a'
     )
     const data = await response.json()
-
 
     for (const id of data.objectIDs) {
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -30,18 +29,17 @@ const fetchDetailData = async idNumber => {
     const data = await response.json()
     console.log(data.isPublicDomain)
     console.log(data.classification)
-    if(data.isPublicDomain===true && data.classification==="Paintings"){
-        console.log(2222)
-        createGallery(data);
+    if (data.isPublicDomain === true && data.classification === 'Paintings') {
+      console.log(2222)
+      createGallery(data)
     }
-   
   } catch (e) {
     console.log(e)
   }
 }
 
-const createGallery = async (data) => {
-    console.log(11111)
+const createGallery = async data => {
+  console.log(11111)
   const {
     title,
     period,
@@ -55,10 +53,10 @@ const createGallery = async (data) => {
     artistDisplayName,
     artistDisplayBio,
     objectId
-  } = data;
+  } = data
   console.log(title)
   try {
-    const newGalleryDate = await GalleryData.create({
+    await aaa.create({
       title,
       period,
       primaryImage,
@@ -72,7 +70,6 @@ const createGallery = async (data) => {
       artistDisplayBio,
       objectId
     })
-   
   } catch (e) {
     console.log(e)
   }

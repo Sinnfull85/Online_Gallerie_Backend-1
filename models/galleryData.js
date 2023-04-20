@@ -51,5 +51,7 @@ const galleryDataSchema= new Schema({
         
     },
 
+},{
+    collection:"paintings"
 });
-module.exports=mongoose.model("GalleryData",galleryDataSchema);
+module.exports=mongoose.model("galleryData",galleryDataSchema);
