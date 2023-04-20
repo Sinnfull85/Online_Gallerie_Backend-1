@@ -9,12 +9,13 @@ const fetchData = async () => {
       'https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=11&q=a'
     )
     const data = await response.json()
-    rawData = data.objectIDs
-    console.log(typeof rawData)
-    // rawData.map((el)=>{
-    //     fetchDetailData(el);
-    // })
-} catch (e) {
+
+
+    for (const id of data.objectIDs) {
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      fetchDetailData(id)
+    }
+  } catch (e) {
     console.log(e)
   }
 }
@@ -27,6 +28,7 @@ const fetchDetailData = async idNumber => {
       `https://collectionapi.metmuseum.org/public/collection/v1/objects/${idNumber}`
     )
     const data = await response.json()
+    console.log(data)
   } catch (e) {
     console.log(e)
   }
