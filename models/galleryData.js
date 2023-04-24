@@ -26,6 +26,14 @@ const galleryDataSchema= new Schema({
         type:String
         
     },
+    objectBeginDate:{
+        type:Number
+        
+    },
+    objectEndDate:{
+        type:Number
+        
+    },
     medium:{
         type:String
         
@@ -52,6 +60,6 @@ const galleryDataSchema= new Schema({
     },
 
 },{
-    collection:"paintings"
+    collection:"paintings2"
 });
 module.exports=mongoose.model("galleryData",galleryDataSchema);
