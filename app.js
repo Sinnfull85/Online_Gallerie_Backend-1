@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const rawData= require("./tools/rawData")
+const gallerDataRouter=require("./routes/galleryData")
 
 var cors = require('cors')
 
@@ -13,5 +14,5 @@ app.use(express.urlencoded({ extended: false }))
 app.get('/', (req, res) => {
     res.send('Hello World!')
   })
-
+  app.use("/gallery",gallerDataRouter);
 module.exports =app;
