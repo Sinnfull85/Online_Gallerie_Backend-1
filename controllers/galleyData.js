@@ -5,8 +5,8 @@ const getGalleryData = async (req, res, next) => {
   if (beginYear && endYear) {
     try {
       const data = await galleryData
-        .find({ objectBeginDate: { $gt: 1000, $lt: 1430 } })
-        .sort({ objectBeginDate: 1 })
+        .find({ objectBeginDate: { $gte: beginYear, $lt: endYear } })
+        .sort({ _id: 1 })
         .skip(itemOffset)
         .limit(limit)
       res.json(data)
