@@ -29,9 +29,21 @@ const getGalleryData = async (req, res, next) => {
   }
 }
 
+const getOneData = async (req,res,next)=>{
+  try {
+    const data = await galleryData
+      .find({ _id: req.params.id })
+      
+    res.json(data)
+    console.log(data)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 
 
 module.exports = {
-  getGalleryData,
+  getGalleryData,getOneData
   
 }
