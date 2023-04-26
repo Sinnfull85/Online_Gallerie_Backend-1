@@ -1,5 +1,8 @@
 const galleryData = require('../models/galleryData')
 
+
+
+
 const getGalleryData = async (req, res, next) => {
   const { itemOffset, limit, beginYear, endYear } = req.query
   if (beginYear && endYear) {
@@ -34,13 +37,19 @@ const getOneData = async (req,res,next)=>{
     const data = await galleryData
       .find({ _id: req.params.id })
       
-    res.json(data)
-    console.log(data)
+    res.json(data[0])
+    
   } catch (e) {
     console.log(e)
   }
 }
 
+
+// const getColor = async()=>{
+//   const {url}=req.query;
+  
+  
+// }
 
 
 module.exports = {
