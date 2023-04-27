@@ -44,15 +44,24 @@ const getOneData = async (req,res,next)=>{
   }
 }
 
+const getSearchedData = async (req,res,next)=>{
+  try {
+    console.log(111)
+    const data = await galleryData
+      .find({ title: { "$regex": req.query.q, "$options": "i" } })
+      console.log(222222)
 
-// const getColor = async()=>{
-//   const {url}=req.query;
-  
-  
-// }
+    res.json(data)
+    
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+
 
 
 module.exports = {
-  getGalleryData,getOneData
+  getGalleryData,getOneData,getSearchedData
   
 }
