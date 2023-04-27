@@ -1,3 +1,7 @@
+
+//-----------
+//this file is used to get data from MET API and imported them into database in MongoDB
+//------------
 // const express = require('express')
 // const mongoose = require('mongoose')
 // const fetch = require('node-fetch')
