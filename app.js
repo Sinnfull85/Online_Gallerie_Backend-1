@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const rawData = require('./tools/rawData')
 const gallerDataRouter = require('./routes/galleryData')
+const authRouter =require ("./routes/authRouter")
 
 var cors = require('cors')
 
@@ -31,4 +32,5 @@ app.post('/gallery/color', async (req, res) => {
 })
 
 app.use('/gallery', gallerDataRouter)
+app.use("/auth",authRouter)
 module.exports = app
