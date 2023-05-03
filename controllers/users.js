@@ -49,15 +49,22 @@ const getUser = asyncHandler(async (req, res) => {
 const likeIt = asyncHandler(async (req, res) => {
   const {
     userId,
-    body: { paintingId, liked }
+    body: { paintingId, paintingTitle, paintingUrl, liked }
   } = req
   if (liked) {
     await usersTaste.create({
       userId,
-      paintingId
+      paintingId,
+      paintingTitle,
+      paintingUrl
     })
   } else {
-    await usersTaste.deleteMany({ paintingId: paintingId, userId: userId })
+    await usersTaste.deleteMany({
+      paintingId: paintingId,
+      userId: userId,
+      paintingTitle: paintingTitle,
+      paintingUrl: paintingUrl
+    })
   }
 
   res.send('like it!')
@@ -73,7 +80,15 @@ const getLikeIt = asyncHandler(async (req, res) => {
   const paintingId = req.params.id
 
   const user = await usersTaste.find({ userId: userId, paintingId: paintingId })
-  res.status(201).json(user)
+  res.status(200).json(user)
+})
+
+const getAllLiked = asyncHandler(async (req, res) => {
+  const userId = req.userId
+
+  const user = await usersTaste.find({ userId: userId })
+  console.log(user)
+  res.status(200).json(user)
 })
 
 module.exports = {
@@ -81,5 +96,6 @@ module.exports = {
   signIn,
   getUser,
   likeIt,
-  getLikeIt
+  getLikeIt,
+  getAllLiked
 }
