@@ -9,18 +9,20 @@ const { comparePasswords } = require('../tools/auth')
 
 const signUp = asyncHandler(async (req, res, next) => {
   const {
+    
     body: { email, password, ...rest }
   } = req
   const found = await userData.findOne({ email })
   if (found) throw new Error('User already exists', 400)
   const hash = await hashPassword(password)
-
+console.log(22333)
   const user = await userData.create({
     ...rest,
     email,
     password: hash
   })
   const token = createJWT(user._id)
+  console.log(user)
   res.json({ token })
 })
 
