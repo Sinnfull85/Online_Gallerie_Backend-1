@@ -48,6 +48,14 @@ const getUser = asyncHandler(async (req, res) => {
   res.status(200).json(user)
 })
 
+const deleteUser =asyncHandler(async (req, res) => {
+    const { userId } = req
+    console.log("deleete")
+    // const user = await userData.findById(userId)
+    await userData.deleteOne({_id:userId})
+    res.json({ success: `User with id of ${userId} was deleted` });
+  })
+
 const likeIt = asyncHandler(async (req, res) => {
   const {
     userId,
@@ -93,11 +101,13 @@ const getAllLiked = asyncHandler(async (req, res) => {
   res.status(200).json(user)
 })
 
+
 module.exports = {
   signUp,
   signIn,
   getUser,
   likeIt,
   getLikeIt,
-  getAllLiked
+  getAllLiked,
+  deleteUser
 }
