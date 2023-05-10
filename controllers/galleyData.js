@@ -13,7 +13,7 @@ const getGalleryData = async (req, res, next) => {
         .skip(itemOffset)
         .limit(limit)
       res.json(data)
-      console.log(data)
+      
     } catch (e) {
       console.log(e)
     }
@@ -25,7 +25,7 @@ const getGalleryData = async (req, res, next) => {
         .skip(itemOffset)
         .limit(limit)
       res.json(data)
-      console.log(data)
+      
     } catch (e) {
       console.log(e)
     }
@@ -46,10 +46,10 @@ const getOneData = async (req,res,next)=>{
 
 const getSearchedData = async (req,res,next)=>{
   try {
-    console.log(111)
+    
     const data = await galleryData
       .find({ title: { "$regex": req.query.q, "$options": "i" } })
-      console.log(222222)
+      
 
     res.json(data)
     

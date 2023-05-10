@@ -15,14 +15,14 @@ const signUp = asyncHandler(async (req, res, next) => {
   const found = await userData.findOne({ email })
   if (found) throw new Error('User already exists', 400)
   const hash = await hashPassword(password)
-console.log(22333)
+
   const user = await userData.create({
     ...rest,
     email,
     password: hash
   })
   const token = createJWT(user._id)
-  console.log(user)
+ 
   res.json({ token })
 })
 
@@ -50,7 +50,7 @@ const getUser = asyncHandler(async (req, res) => {
 
 const deleteUser =asyncHandler(async (req, res) => {
     const { userId } = req
-    console.log("deleete")
+    
     // const user = await userData.findById(userId)
     await userData.deleteOne({_id:userId})
     res.json({ success: `User with id of ${userId} was deleted` });
@@ -97,7 +97,7 @@ const getAllLiked = asyncHandler(async (req, res) => {
   const userId = req.userId
 
   const user = await usersTaste.find({ userId: userId })
-  console.log(user)
+  
   res.status(200).json(user)
 })
 
