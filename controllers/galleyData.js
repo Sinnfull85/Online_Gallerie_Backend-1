@@ -5,6 +5,7 @@ const galleryData = require('../models/galleryData')
 
 const getGalleryData = async (req, res, next) => {
   const { itemOffset, limit, beginYear, endYear } = req.query
+  console.log(`recieve getGalleryData(itemOffset:[${itemOffset}], limit:[${limit}], beginYear:[${beginYear}], endYear:[${endYear}])`)
   if (beginYear && endYear) {
     try {
       const data = await galleryData
@@ -30,6 +31,7 @@ const getGalleryData = async (req, res, next) => {
       console.log(e)
     }
   }
+  console.log('data is successfully returned!')
 }
 
 const getOneData = async (req,res,next)=>{
